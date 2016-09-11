@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="c725dcc3ad1846428c4ee82938b6d0be" Name="Diagram1">
         <EntityTypeShape EntityType="Challenge_BDModel.Postagens" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Challenge_BDModel.PostagensProcessadas" Width="2.125" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="Challenge_BDModel.PostagensProcessadasPostagens" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

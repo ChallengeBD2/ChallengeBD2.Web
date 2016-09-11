@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace ChallengeBD2.GerenciadorDeDados
 {
     public class Analisador
-    { 
-        //Testeeeeeeeee
+    {
     }
 }

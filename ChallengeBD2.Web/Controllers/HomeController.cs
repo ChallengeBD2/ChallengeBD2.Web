@@ -1,30 +1,28 @@
-﻿using System;
+﻿using ChallengeBD2.GerenciadorDeDados;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ChallengeBD2.Web.Controllers
+namespace ChallengeBD2.WebPage.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             return View();
-        }
+        }        
 
-        public ActionResult About()
+        public ActionResult LerArquivoDePostagens()
         {
-            ViewBag.Message = "Your application description page.";
+            HttpPostedFileBase arquivo = Request.Files["MeuArquivo"];
 
-            return View();
-        }
+            Coletor c = new Coletor();
+          var listaPostagens  = c.LerPostagensDoArquivo(arquivo.InputStream);
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View("Index", listaPostagens);
         }
     }
 }

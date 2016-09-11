@@ -15,22 +15,16 @@ namespace ChallengeBD2.GerenciadorDeDados.Model
 using System;
     using System.Collections.Generic;
     
-public partial class Postagens
+public partial class PostagensProcessadas
 {
 
     public long IdPost { get; set; }
 
-    public string Post { get; set; }
-
-    public string IdUsuario { get; set; }
-
-    public string Instituicao { get; set; }
-
-    public Nullable<bool> PostagemProcessada { get; set; }
+    public string PostProcessado { get; set; }
 
 
 
-    public virtual PostagensProcessadas PostagensProcessadas { get; set; }
+    public virtual Postagens Postagens { get; set; }
 
 }
 

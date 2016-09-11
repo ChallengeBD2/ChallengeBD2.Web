@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ChallengeBD2.Web
+namespace ChallengeBD2.WebPage
 {
     public class RouteConfig
     {

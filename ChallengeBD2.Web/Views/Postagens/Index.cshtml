@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ChallengeBD2.GerenciadorDeDados.Model.Postagens>
+@{
+    ViewBag.Title = "Postagens";
+}
+
+<h1>Processador</h1>
+<br/>
+<input type="submit" value="Processar arquivos" />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Id Post
+        </th>
+        <th>
+            Postagem
+        </th>
+        <th>
+            Aluno
+        </th>
+
+        <th>
+            Instituição
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Post)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instituicao)
+                </td>
+            </tr>
+        }
+    }
+
+</table>

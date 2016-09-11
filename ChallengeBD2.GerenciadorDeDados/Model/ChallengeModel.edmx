@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Challenge_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Challenge_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Postagens">
@@ -15,19 +15,28 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
           <Property Name="Post" Type="nvarchar(max)" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="100" />
           <Property Name="Instituicao" Type="varchar" MaxLength="100" />
+          <Property Name="PostagemProcessada" Type="bit" />
+        </EntityType>
+        <EntityType Name="PostagensProcessadas">
+          <Key>
+            <PropertyRef Name="IdPost" />
+          </Key>
+          <Property Name="IdPost" Type="bigint" Nullable="false" />
+          <Property Name="PostProcessado" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="Challenge_BDModelStoreContainer">
+          <EntitySet Name="PostagensProcessadas" EntityType="Self.PostagensProcessadas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Postagens" EntityType="Self.Postagens" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Postagens].[IdPost] AS [IdPost], 
     [Postagens].[Post] AS [Post], 
     [Postagens].[IdUsuario] AS [IdUsuario], 
-    [Postagens].[Instituicao] AS [Instituicao]
+    [Postagens].[Instituicao] AS [Instituicao], 
+    [Postagens].[PostagemProcessada] AS [PostagemProcessada]
     FROM [dbo].[Postagens] AS [Postagens]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Challenge_BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -39,10 +48,37 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
           <Property Name="Post" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Instituicao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PostagemProcessada" Type="Boolean" />
+          <NavigationProperty Name="PostagensProcessadas" Relationship="Challenge_BDModel.PostagensProcessadasPostagens" FromRole="Postagens" ToRole="PostagensProcessadas" />
         </EntityType>
         <EntityContainer Name="Challenge_BDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Postagens" EntityType="Self.Postagens" />
+          <EntitySet Name="PostagensProcessadas" EntityType="Challenge_BDModel.PostagensProcessadas" />
+          <AssociationSet Name="PostagensProcessadasPostagens" Association="Challenge_BDModel.PostagensProcessadasPostagens">
+            <End Role="PostagensProcessadas" EntitySet="PostagensProcessadas" />
+            <End Role="Postagens" EntitySet="Postagens" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PostagensProcessadas">
+          <Key>
+            <PropertyRef Name="IdPost" />
+          </Key>
+          <Property Name="IdPost" Type="Int64" Nullable="false" />
+          <Property Name="PostProcessado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Postagens" Relationship="Challenge_BDModel.PostagensProcessadasPostagens" FromRole="PostagensProcessadas" ToRole="Postagens" />
+        </EntityType>
+        <Association Name="PostagensProcessadasPostagens">
+          <End Type="Challenge_BDModel.PostagensProcessadas" Role="PostagensProcessadas" Multiplicity="0..1" />
+          <End Type="Challenge_BDModel.Postagens" Role="Postagens" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Postagens">
+              <PropertyRef Name="IdPost" />
+            </Principal>
+            <Dependent Role="PostagensProcessadas">
+              <PropertyRef Name="IdPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52,10 +88,19 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
           <EntitySetMapping Name="Postagens">
             <EntityTypeMapping TypeName="Challenge_BDModel.Postagens">
               <MappingFragment StoreEntitySet="Postagens">
+                <ScalarProperty Name="PostagemProcessada" ColumnName="PostagemProcessada" />
                 <ScalarProperty Name="IdPost" ColumnName="IdPost" />
                 <ScalarProperty Name="Post" ColumnName="Post" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Instituicao" ColumnName="Instituicao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostagensProcessadas">
+            <EntityTypeMapping TypeName="Challenge_BDModel.PostagensProcessadas">
+              <MappingFragment StoreEntitySet="PostagensProcessadas">
+                <ScalarProperty Name="PostProcessado" ColumnName="PostProcessado" />
+                <ScalarProperty Name="IdPost" ColumnName="IdPost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
