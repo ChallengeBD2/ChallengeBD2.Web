@@ -73,6 +73,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChallengeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ClassificacaoTermo.cs">
+      <DependentUpon>ChallengeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PesoPostagens.cs">
+      <DependentUpon>ChallengeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Postagens.cs">
       <DependentUpon>ChallengeModel.tt</DependentUpon>
     </Compile>

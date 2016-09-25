@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Challenge_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassificacaoTermo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Termo" Type="varchar" MaxLength="150" />
+          <Property Name="Classificacao" Type="varchar" MaxLength="20" />
+          <Property Name="Peso" Type="int" />
+        </EntityType>
+        <EntityType Name="PesoPostagens">
+          <Key>
+            <PropertyRef Name="IdTermo" />
+            <PropertyRef Name="IdPost" />
+          </Key>
+          <Property Name="IdTermo" Type="int" Nullable="false" />
+          <Property Name="IdPost" Type="bigint" Nullable="false" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="Instituicao" Type="varchar" MaxLength="100" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Postagens">
@@ -25,6 +44,8 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
           <Property Name="PostProcessado" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="Challenge_BDModelStoreContainer">
+          <EntitySet Name="ClassificacaoTermo" EntityType="Self.ClassificacaoTermo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PesoPostagens" EntityType="Self.PesoPostagens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostagensProcessadas" EntityType="Self.PostagensProcessadas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Postagens" EntityType="Self.Postagens" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -58,6 +79,8 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
             <End Role="PostagensProcessadas" EntitySet="PostagensProcessadas" />
             <End Role="Postagens" EntitySet="Postagens" />
           </AssociationSet>
+          <EntitySet Name="ClassificacaoTermo" EntityType="Challenge_BDModel.ClassificacaoTermo" />
+          <EntitySet Name="PesoPostagens" EntityType="Challenge_BDModel.PesoPostagens" />
         </EntityContainer>
         <EntityType Name="PostagensProcessadas">
           <Key>
@@ -79,6 +102,25 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClassificacaoTermo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Termo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Classificacao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Peso" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PesoPostagens">
+          <Key>
+            <PropertyRef Name="IdTermo" />
+            <PropertyRef Name="IdPost" />
+          </Key>
+          <Property Name="IdTermo" Type="Int32" Nullable="false" />
+          <Property Name="IdPost" Type="Int64" Nullable="false" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Instituicao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -101,6 +143,26 @@ warning 6002: The table/view 'Challenge_BD.dbo.Postagens' does not have a primar
               <MappingFragment StoreEntitySet="PostagensProcessadas">
                 <ScalarProperty Name="PostProcessado" ColumnName="PostProcessado" />
                 <ScalarProperty Name="IdPost" ColumnName="IdPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassificacaoTermo">
+            <EntityTypeMapping TypeName="Challenge_BDModel.ClassificacaoTermo">
+              <MappingFragment StoreEntitySet="ClassificacaoTermo">
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Classificacao" ColumnName="Classificacao" />
+                <ScalarProperty Name="Termo" ColumnName="Termo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PesoPostagens">
+            <EntityTypeMapping TypeName="Challenge_BDModel.PesoPostagens">
+              <MappingFragment StoreEntitySet="PesoPostagens">
+                <ScalarProperty Name="Instituicao" ColumnName="Instituicao" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="IdPost" ColumnName="IdPost" />
+                <ScalarProperty Name="IdTermo" ColumnName="IdTermo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

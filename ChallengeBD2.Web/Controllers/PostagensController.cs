@@ -1,9 +1,6 @@
 ﻿using ChallengeBD2.GerenciadorDeDados;
 using ChallengeBD2.GerenciadorDeDados.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ChallengeBD2.WebPage.Controllers
@@ -25,6 +22,14 @@ namespace ChallengeBD2.WebPage.Controllers
             Processador.ProcessarPostagens();
 
             return View("Index",ListaPostagens);
+        }
+
+        public ActionResult AnalisarPostagens()
+        {
+            var Analisador = new Analisador();
+            Analisador.AnalisarPostagens();
+
+            return View("Index", ListaPostagens);
         }
     }
 }

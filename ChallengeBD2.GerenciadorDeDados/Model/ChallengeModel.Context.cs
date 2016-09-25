@@ -36,6 +36,10 @@ public partial class Challenge_BDEntities : DbContext
 
     public virtual DbSet<PostagensProcessadas> PostagensProcessadas { get; set; }
 
+    public virtual DbSet<ClassificacaoTermo> ClassificacaoTermo { get; set; }
+
+    public virtual DbSet<PesoPostagens> PesoPostagens { get; set; }
+
 }
 
 }
