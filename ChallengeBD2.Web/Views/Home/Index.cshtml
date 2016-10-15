@@ -3,7 +3,11 @@
     ViewBag.Title = "Coletor";
 }
 
-<h1>Coletor</h1>
+<section class="content-header">
+    <h1>
+        Coletor
+    </h1>
+</section>
 
 @using (Html.BeginForm("LerArquivoDePostagens", "Home",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

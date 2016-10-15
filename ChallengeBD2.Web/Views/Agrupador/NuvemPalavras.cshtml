@@ -1,0 +1,138 @@
+﻿@model ChallengeBD2.WebPage.Models.NuvemPalavras
+@{
+
+}
+
+<style>
+    label {
+        padding: 0;
+        position: absolute;
+        font-style:normal;
+    }
+
+    .TermoPositivo {
+        color: lightgreen;
+    }
+
+    .TermoNegativo {
+        color: red;
+    }
+
+    #palavra1 {
+        font-size: 100pt;
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+
+    #palavra2 {
+        font-size: 60pt;
+        margin-top: 159px;
+        margin-left: 100px;
+    }
+
+    #palavra3 {
+        font-size: 30pt;
+        margin-top: 500px;
+        margin-left: 400px;
+    }
+
+    #palavra4 {
+        font-size: 70pt;
+        margin-top: 95px;
+        margin-left: 350px;
+    }
+
+    #palavra5 {
+        font-size: 30pt;
+        margin-top: 450px;
+        margin-left: 200px;
+    }
+
+    #palavra6 {
+        font-size: 100pt;
+        margin-top: 340px;
+        margin-left: 550px;
+    }
+
+    #palavra7 {
+        font-size: 50pt;
+        margin-top:150px;
+        margin-left: 750px;
+    }
+
+
+    #palavra8 {
+        font-size: 30pt;
+        margin-top: 300px;
+        margin-left: 0px;
+    }
+
+    #palavra9 {
+        font-size: 100pt;
+        margin-top: 295px;
+        margin-left: 200px;
+    }
+
+    #palavra10 {
+        font-size: 50pt;
+        margin-top: 50px;
+        margin-left: 200px;
+    }
+
+    #palavra11 {
+        font-size: 100pt;
+        margin-top: 150px;
+        margin-left: 300px;
+    }
+
+    #palavra12 {
+        font-size: 50pt;
+        margin-top: 0px;
+        margin-left: 200px;
+    }
+
+    #palavra13 {
+        font-size: 50pt;
+        margin-top: 270px;
+        margin-left: 200px;
+    }
+
+    #palavra14 {
+        font-size: 70pt;
+        margin-top: 265px;
+        margin-left: 640px;
+    }
+
+    #palavra15 {
+        font-size: 50pt;
+        margin-top: 280px;
+        margin-left: 439px;
+    }
+
+        #palavra16 {
+        font-size: 50pt;
+        margin-top: 5px;
+        margin-left: 25px;
+    }
+</style>
+<h2>Nuvem de Palavras - @ViewBag.Title</h2>
+
+@if (Model != null)
+{
+    <label class="TermoPositivo" id="palavra1">Bom</label>
+    <label class="TermoPositivo" id="palavra2">Boa</label>
+    <label class="TermoPositivo" id="palavra3">Legal</label>
+    <label class="TermoPositivo" id="palavra4">Segura</label>
+    <label class="TermoNegativo" id="palavra5">porra</label>
+    <label class="TermoPositivo" id="palavra6">Superior</label>
+    <label class="TermoNegativo" id="palavra7">triste</label>
+    <label class="TermoNegativo" id="palavra8">longe</label>
+    <label class="TermoNegativo" id="palavra9">chato</label>
+    <label class="TermoNegativo" id="palavra10">incompetente</label>
+    <label class="TermoPositivo" id="palavra11">normal</label>
+    <label class="TermoPositivo" id="palavra12">Agradavel</label>
+    <label class="TermoNegativo" id="palavra13">absurdo</label>
+    <label class="TermoNegativo" id="palavra14">fraco</label>
+    <label class="TermoPositivo" id="palavra15">Otimo</label>
+    <label class="TermoNegativo" id="palavra16">tosca</label>
+}

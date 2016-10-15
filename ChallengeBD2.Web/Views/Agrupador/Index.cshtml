@@ -1,0 +1,70 @@
+﻿@model ChallengeBD2.WebPage.Models.ViewModelAgrupador
+@{
+    ViewBag.Title = "Agrupador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="box">
+    <div class="box-header">
+        <i class="fa fa-fw fa-line-chart"></i>
+        <h1 class="box-title">Ranqueamento das universidades</h1>
+    </div>
+    <table class="table table-bordered table-striped dataTable">
+        <tr>
+            <th style="text-align: right">
+                Rank
+            </th>
+            <th>
+                Universidade
+            </th>
+            <th style="text-align: center">
+                Número de
+                Posts Coletados
+            </th>
+            <th style="text-align: center">
+                Postagens
+                Positivas
+            </th>
+
+            <th style="text-align: center">
+                Porcentagem das
+                Postagens Positivas
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.ListaDadosAgrupadosPorUniversidade)
+            {
+                <tr>
+                    <td style="text-align: right">
+                        @Html.DisplayFor(modelItem => item.Rank).
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Instituicao, "GerarNuvemDePalavras", new { universidade = item.Instituicao } , null)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.TotalPosts)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.TotalPostsPositivos)
+                    </td>
+
+                    <td>
+                        <div class="progress progress-md progress-striped active">
+                            <div class="progress-bar progress-bar-primary" style="width:@Html.DisplayFor(modelItem => item.Porcentagem)%"></div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="badge bg-light-blue">@Html.DisplayFor(modelItem => item.Porcentagem)%</span>
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
