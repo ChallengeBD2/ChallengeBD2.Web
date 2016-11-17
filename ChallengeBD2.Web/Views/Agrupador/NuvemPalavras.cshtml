@@ -4,10 +4,16 @@
 }
 
 <style>
-    label {
+    span {
         padding: 0;
-        position: absolute;
-        font-style:normal;
+        z-index: 0;
+        position: relative;
+        word-spacing: normal;
+        letter-spacing: normal;
+        text-decoration: none;
+        text-transform: none;
+        text-align: center;
+        text-indent: 0ex;
     }
 
     .TermoPositivo {
@@ -19,120 +25,89 @@
     }
 
     #palavra1 {
-        font-size: 100pt;
-        margin-top: 50px;
-        margin-left: 50px;
+        font-size: 39pt;
     }
 
     #palavra2 {
-        font-size: 60pt;
-        margin-top: 159px;
-        margin-left: 100px;
+        font-size:44pt;
     }
 
     #palavra3 {
         font-size: 30pt;
-        margin-top: 500px;
-        margin-left: 400px;
     }
 
     #palavra4 {
-        font-size: 70pt;
-        margin-top: 95px;
-        margin-left: 350px;
+        font-size:55pt;
     }
 
     #palavra5 {
-        font-size: 30pt;
-        margin-top: 450px;
-        margin-left: 200px;
+        font-size: 26pt;
     }
 
     #palavra6 {
-        font-size: 100pt;
-        margin-top: 340px;
-        margin-left: 550px;
+        font-size: 38pt;
     }
 
     #palavra7 {
-        font-size: 50pt;
-        margin-top:150px;
-        margin-left: 750px;
+        font-size: 47pt;
     }
 
 
     #palavra8 {
-        font-size: 30pt;
-        margin-top: 300px;
-        margin-left: 0px;
+        font-size: 27pt;
     }
 
     #palavra9 {
-        font-size: 100pt;
-        margin-top: 295px;
-        margin-left: 200px;
+        font-size: 36pt;
     }
 
     #palavra10 {
-        font-size: 50pt;
-        margin-top: 50px;
-        margin-left: 200px;
+        font-size: 35pt;
     }
 
     #palavra11 {
-        font-size: 100pt;
-        margin-top: 150px;
-        margin-left: 300px;
+        font-size: 40pt;
     }
 
     #palavra12 {
-        font-size: 50pt;
-        margin-top: 0px;
-        margin-left: 200px;
+        font-size: 15pt;
     }
 
     #palavra13 {
-        font-size: 50pt;
-        margin-top: 270px;
-        margin-left: 200px;
+        font-size: 40pt;
     }
 
     #palavra14 {
-        font-size: 70pt;
-        margin-top: 265px;
-        margin-left: 640px;
+        font-size: 60pt;
     }
 
     #palavra15 {
-        font-size: 50pt;
-        margin-top: 280px;
-        margin-left: 439px;
+        font-size: 21pt;
     }
 
-        #palavra16 {
-        font-size: 50pt;
-        margin-top: 5px;
-        margin-left: 25px;
+    #palavra16 {
+        font-size: 20pt;
     }
 </style>
 <h2>Nuvem de Palavras - @ViewBag.Title</h2>
 
-@if (Model != null)
-{
-    <label class="TermoPositivo" id="palavra1">Bom</label>
-    <label class="TermoPositivo" id="palavra2">Boa</label>
-    <label class="TermoPositivo" id="palavra3">Legal</label>
-    <label class="TermoPositivo" id="palavra4">Segura</label>
-    <label class="TermoNegativo" id="palavra5">porra</label>
-    <label class="TermoPositivo" id="palavra6">Superior</label>
-    <label class="TermoNegativo" id="palavra7">triste</label>
-    <label class="TermoNegativo" id="palavra8">longe</label>
-    <label class="TermoNegativo" id="palavra9">chato</label>
-    <label class="TermoNegativo" id="palavra10">incompetente</label>
-    <label class="TermoPositivo" id="palavra11">normal</label>
-    <label class="TermoPositivo" id="palavra12">Agradavel</label>
-    <label class="TermoNegativo" id="palavra13">absurdo</label>
-    <label class="TermoNegativo" id="palavra14">fraco</label>
-    <label class="TermoPositivo" id="palavra15">Otimo</label>
-    <label class="TermoNegativo" id="palavra16">tosca</label>
-}
+<div class="container" style="line-height:280%">
+    @if (Model != null)
+    {
+        int PularLinha = 0;
+
+        for (int i = 0; i < @Model.Palavras.Count; i++)
+        {
+            if (PularLinha == 8)
+            {
+                <br />
+                PularLinha = 0;
+            }
+
+            <samp class="@Model.Palavras[i].AvaliacaoTermo" id="@(String.Format("palavra{0}", PularLinha))">@Model.Palavras[i].Termo</samp>
+
+            //style = "font-size:@Model.Palavras[i].TamanhoPalavra"
+            PularLinha++;
+        }
+    }
+</div>

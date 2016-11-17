@@ -23,6 +23,10 @@
                 Posts Coletados
             </th>
             <th style="text-align: center">
+                Número de
+                Posts Coletados Validos
+            </th>
+            <th style="text-align: center">
                 Postagens
                 Positivas
             </th>
@@ -48,6 +52,9 @@
                     </td>
                     <td style="text-align: center">
                         @Html.DisplayFor(modelItem => item.TotalPosts)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.TotalPostsValidos)
                     </td>
                     <td style="text-align: center">
                         @Html.DisplayFor(modelItem => item.TotalPostsPositivos)

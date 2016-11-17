@@ -8,6 +8,10 @@ namespace ChallengeBD2.WebPage.Models
 {
     public class ViewModelAgrupador
     {
+        public ViewModelAgrupador()
+        {
+            nuvemPalavras = new NuvemPalavras();
+        }
         public List<DadosAgrupadosPorUniversidade> ListaDadosAgrupadosPorUniversidade { get; set; }
         public NuvemPalavras nuvemPalavras { get; set; }
     }
@@ -16,6 +20,6 @@ namespace ChallengeBD2.WebPage.Models
 
     public class NuvemPalavras
     {
-        public List<string> Palavras { get; set; }
+        public List<TermosPorUniversidade> Palavras { get; set; }
     }
 }
