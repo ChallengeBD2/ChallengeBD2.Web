@@ -25,7 +25,7 @@ namespace ChallengeBD2.GerenciadorDeDados
                     //Procurar em cada postagem os termos a serem analisados
                     foreach (var termo in Termos)
                     {
-                        if(postagem.PostProcessado.Contains(" "+ termo.Termo +" "))
+                        if(postagem.PostProcessado.Contains(" "+ termo.Termo.ToLower() +" "))
                         {
                             //Cria nova item de vinculo das tabelas
                             var pesoPostagens = new PesoPostagens();

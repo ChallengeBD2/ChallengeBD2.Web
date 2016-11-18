@@ -51,21 +51,23 @@ namespace ChallengeBD2.GerenciadorDeDados
                 var listaTermos = (from PP in context.PesoPostagens
                                    join CT in context.ClassificacaoTermo on new { Id = PP.IdTermo } equals new { CT.Id }
                                    where PP.Instituicao == Universidade
-                                   group PP by new { Termo = CT.Termo, Peso = CT.Peso } into g
-                                   select new { g.Key.Termo, g.Key.Peso });
+                                   group PP by new { Termo = CT.Termo, Peso = CT.Peso, idTermo = CT.Id } into g
+                                   select new { g.Key.Termo, g.Key.Peso, g.Key, idTermo = g.Key.idTermo });
 
                 foreach (var termo in listaTermos)
                 {
                     var dados = new TermosPorUniversidade();
                     dados.Termo = termo.Termo;
                     dados.AvaliacaoTermo = termo.Peso == 1 ? "TermoPositivo" : "TermoNegativo";
-                    dados.TamanhoPalavra = new Random(30).Next(15,30) + "pt";
+                    int qtdPost = context.PesoPostagens.Count(p => p.IdTermo == termo.idTermo && p.Instituicao == Universidade);
+                    dados.TamanhoPalavra = qtdPost == 1 ? "15pt" : qtdPost > 10 ? "100pt" : qtdPost * 15 + "pt";
+                    dados.baguncaPalavras = new Random().Next();
                     retorno.Add(dados);
                     cont++;
                 }
             }
 
-            return retorno;
+            return retorno.OrderByDescending(od => od.baguncaPalavras).ToList();
         }
 
         public class DadosAgrupadosPorUniversidade
@@ -83,6 +85,8 @@ namespace ChallengeBD2.GerenciadorDeDados
             public string Termo { get; set; }
             public string AvaliacaoTermo { get; set; }
             public string TamanhoPalavra { get; set; }
+
+            public int baguncaPalavras { get; set; }
         }
     }
 }
